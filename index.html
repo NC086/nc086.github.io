@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        .container {
+            background: #eee;
+            width: 600px;
+            height: 2rem;
+        }
+
+        #code {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+            color: green;
+            border: none;
+            padding: 2px 3px;
+            letter-spacing: 3px;
+            font-weight: bolder;
+        }
+
+        /* 超小设备（手机，600px 以下屏幕设备） */
+        @media only screen and (max-width: 600px) {
+            .example {
+                background: red;
+            }
+        }
+
+        /* 小设备（平板电脑和大型手机，600 像素及以上） */
+        @media only screen and (min-width: 600px) {
+            .example {
+                background: green;
+            }
+        }
+
+        /* 中型设备（平板电脑，768 像素及以上） */
+        @media only screen and (min-width: 768px) {
+            .example {
+                background: blue;
+            }
+        }
+
+        /* 大型设备（笔记本电脑/台式机，992 像素及以上） */
+        @media only screen and (min-width: 992px) {
+            .example {
+                background: blue;
+            }
+        }
+
+        /* 超大型设备（大型笔记本电脑和台式机，1200 像素及以上） */
+        @media only screen and (min-width: 1200px) {
+            .example {
+                background: blue;
+            }
+        }
+    </style>
+
+    <script>
+        var code;
+
+        function createCode() {
+            code = "";
+            var codeLength = 4;
+            var checkCode = document.getElementById("code");
+            var random = new Array(
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                'A',
+                'B',
+                'C',
+                'D',
+                'E',
+                'F',
+                'G',
+                'H',
+                'I',
+                'J',
+                'K',
+                'L',
+                'O',
+                'P',
+                'Q',
+                'R',
+                's',
+                'T',
+                'U',
+                'V',
+                'W',
+                'X',
+                'Y',
+                'Z',
+            )
+            for(var i = 0; i < codeLength; i++) {
+                var index = Math.floor(Math.random()*36);
+                code += random[index];
+            }
+            checkCode.value = code;
+        }
+
+        function validate() {
+            var inputCode = document.getElementById("input").value.toUpperCase();
+            if(inputCode.length <= 0) {
+                alert("请输入验证码！");
+            } else if(inputCode != code) {
+                alert("验证失败！");
+                createCode();
+                document.getElementById("input").value = "";
+            } else {
+                alert("验证成功！");
+            }
+        }
+    </script>
+</head>
+<body onload="c1reateCode();">
+    <h1>响应式判断</h1>
+    <p class="example">操作浏览器窗口，查看效果（不同颜色不同效果）</p>
+    <div class="container">
+        <div class="sticky-box">
+            <div class="jiaoyan">验证码：
+                <input type="text" name="input" id="input" />
+                <input type="button" id="code" onclick="createCode();" style="width: 60px;" title="点击更换验证码" />
+                <input type="button" value="验证" onclick="validate();" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
