@@ -6,6 +6,10 @@
     <title>Document</title>
 
     <style>
+        * {
+            margin: 0;
+        }
+
         .container {
             background: #eee;
             width: 600px;
@@ -17,9 +21,67 @@
             font-style: italic;
             color: green;
             border: none;
-            padding: 2px 3px;
+            padding: 2px 2px;
             letter-spacing: 3px;
             font-weight: bolder;
+        }
+
+        .menu {
+            overflow: hidden;
+            height: 40px;
+            line-height: 200%;
+            background-color: #5d5d5d;
+        }
+
+        .menu li a {
+            height: 40px;
+            width: 120px;
+            text-align: center;
+            float: left;
+            color: #fff;
+        }
+
+        .menu li a:hover,
+        .active {
+            background-color: #505050;
+        }
+
+        .menu .icon {
+            display: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .menu a:not(:first-child) {
+                display: none;
+            }
+            .menu a.icon {
+                float: right;
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .menu.responsive {
+                position: relative;
+            }
+            .menu.responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .menu.responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
         }
 
         /* 超小设备（手机，600px 以下屏幕设备） */
@@ -46,14 +108,14 @@
         /* 大型设备（笔记本电脑/台式机，992 像素及以上） */
         @media only screen and (min-width: 992px) {
             .example {
-                background: blue;
+                background: orange;
             }
         }
 
         /* 超大型设备（大型笔记本电脑和台式机，1200 像素及以上） */
         @media only screen and (min-width: 1200px) {
             .example {
-                background: blue;
+                background: pink;
             }
         }
     </style>
@@ -66,16 +128,16 @@
             var codeLength = 4;
             var checkCode = document.getElementById("code");
             var random = new Array(
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
+                '0',
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '8',
+                '9',
                 'A',
                 'B',
                 'C',
@@ -120,10 +182,32 @@
                 alert("验证成功！");
             }
         }
+
+        function changeClass() {
+            var active = document.getElementsByClassName("active")[0];
+            active.classList.remove("active");
+        }
+
+        function menu() {
+            var x = document.getElementById("menu");
+            if (x.className === "nav") {
+                x.className += " responsive";
+            } else {
+                x.className = "nav";
+            }
+        }
     </script>
 </head>
-<body onload="c1reateCode();">
-    <h1>响应式判断</h1>
+<body onload="createCode();">
+    <ul class="menu nav" id="menu">
+        <li><a href="#" class="menuList active" onclick="changeClass();this.className='active';">首页</a></li>
+        <li><a href="#" class="menuList " onclick="changeClass();this.className='active';">笔记</a></li>
+        <li><a href="#" class="menuList " onclick="changeClass();this.className='active';">工具</a></li>
+        <li><a href="#" class="menuList " onclick="changeClass();this.className='active';">手册</a></li>
+        <li><a href="#" class="menuList " onclick="changeClass();this.className='active';">文档</a></li>
+        <li><a href="javascipt:void(0);" style="font-size: 15px;" class="icon" onclick="menu();">&#9776;</a></li>
+    </ul>
+    
     <p class="example">操作浏览器窗口，查看效果（不同颜色不同效果）</p>
     <div class="container">
         <div class="sticky-box">
